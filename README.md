@@ -30,11 +30,12 @@ pip install robotframework-seleniumlibrary
 
 ### Casos de teste
 
-<img src="./casosdeteste.png">
+![casosdeteste](https://user-images.githubusercontent.com/76436929/138608105-0472c903-d805-42d4-8559-ec12882070df.png)
+
 
 ### Resultados
 
-<img src="./test_statistics.gif">
+![test_statistics](https://user-images.githubusercontent.com/76436929/138608240-62148266-a1a3-43ac-b7db-8ed0465ac432.gif)
 
 
 
