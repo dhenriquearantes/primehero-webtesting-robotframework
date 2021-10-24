@@ -19,16 +19,16 @@
 
 Antes de começar, sera necessário ter instalado as ferramentas e tecnologias:
 * [Python](https://www.python.org/)
-* [Robot Framework](https://www.typescriptlang.org/)
+* [Robot Framework](https://robotframework.org/)
 ~~~python3
 pip install robotframework
 ~~~
-* [SeleniumLibrary](https://reactnative.dev/)
+* [SeleniumLibrary](https://github.com/robotframework/SeleniumLibrary/)
 ~~~python3
 pip install robotframework-seleniumlibrary
 ~~~
 * [WebDriverManager](https://sites.google.com/a/chromium.org/chromedriver/home)
-* [Visual Studio Code](https://openweathermap.org/api) ou [Pycharm](https://www.jetbrains.com/pt-br/pycharm/download/)
+* [Visual Studio Code](https://code.visualstudio.com/) ou [Pycharm](https://www.jetbrains.com/pt-br/pycharm/download/)
 
 ### Casos de teste
 
