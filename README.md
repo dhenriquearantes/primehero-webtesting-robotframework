@@ -8,7 +8,9 @@
 
 <p align="center">
  <a href="#pré-requisitos">Pré Requisitos</a> •
- <a href="#rodando-o-mobile">Casos de teste</a> •
+ <a href="#casos-de-teste">Casos de teste</a> •
+ <a href="#resultados">Resultados</a>
+ 
 
 </p>
 
