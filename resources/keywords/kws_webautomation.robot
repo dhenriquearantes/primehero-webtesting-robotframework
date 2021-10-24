@@ -1,100 +1,104 @@
 *** Settings ***
+
 Documentation    Aqui estarão presentes todas as keywords dos testes web
 
 Resource    ../package.robot
+Resource    ../pages/pages_webautomation.robot
 
 
 *** Keywords ***
 
 #Caso de teste 01
 
-Acessar a página home do site Automation Practice                                                                  
+Dado que o cliente esteja na página home do site Automation Practice                                                                  
     Title Should Be    My Store   
-Digitar o nome do produto "${PRODUTO}" no campo de pesquisa
+E digitar o nome do produto "${PRODUTO}" no campo de pesquisa
     Wait Until Element Is Visible                   ${TOP_MENU}
     Input Text                                      ${INPUT_PRODUTO}                  ${PRODUTO}
-Clicar no botão pesquisar
+Quando clicar no botão pesquisar
     Click Element                                   ${PESQUISAR}
-Conferir se o produto "${PRODUTO}" foi listado no site
+Então conferir se o produto "${PRODUTO}" foi listado no site
     Title Should Be                                 Search - My Store
-    Page Should Contain Image                       xpath=//img[@src='http://automationpractice.com/img/p/7/7-home_default.jpg']
+    Page Should Contain Image                       ${BLOUSE}
     Wait Until Element Is Visible                   ${HOME_ICON}
 
 #Caso de testes 02
 
-Conferir mensagem "No results were found for your search "${PRODUTO}"
+Então conferir se a mensagem "No results were found for your search "${PRODUTO}"
     Title Should Be                  Search - My Store
-    Page Should Contain Element      xpath=//div[@id='center_column']//p[contains(text(), 'No results were found for your search')] 
-    Page Should Contain Element      xpath=//p[contains(text(), '${PRODUTO}')]
+    Page Should Contain Element                    xpath=//div[@id='center_column']//p[contains(text(), 'No results were found for your search')]
+    Page Should Contain Element                    xpath=//p[contains(text(), '${PRODUTO}')]  
 
 #Caso de teste 03
 
-Passar o mouse por cima da categoria "${CATEGORIA}" no menu principal superior de categorias   
-    Mouse Over        ${MOUSE_OVER}   
-    Wait Until Element Is Visible    xpath=//ul[@class='submenu-container clearfix first-in-line-xs']  
-Clicar na sub categoria "${SUB_CATEGORIA}"
-    Click Element                    xpath=//li/a[text()='${SUB_CATEGORIA}']
-    Wait Until Element Is Visible    xpath=//span[@class='category-name'][contains(text(),'${SUB_CATEGORIA}')]
-Conferir se os produtos da sub-categoria "${SUB_CATEGORIA}" foram mostrados na página
-    Page Should Contain Element      xpath=//span[@class='category-name'][contains(text(),'${SUB_CATEGORIA}')]
-    Page Should Contain Element      xpath=//ul[contains(@class, 'product_list')]
+E passar o mouse por cima da categoria "${CATEGORIA}" no menu principal superior de categorias   
+    Mouse Over                                      ${MOUSE_OVER}   
+    Wait Until Element Is Visible                   ${SUBMENU} 
+Quando clicar na sub categoria "${SUB_CATEGORY}"
+    Click Element                                   xpath=//li/a[text()='${SUB_CATEGORY}']
+    Wait Until Element Is Visible                   xpath=//span[@class='category-name'][contains(text(),'${SUB_CATEGORY}')]
+Então conferir se os produtos da sub-categoria "${SUB_CATEGORY}" foram mostrados na página
+    Page Should Contain Element                     xpath=//span[@class='category-name'][contains(text(),'${SUB_CATEGORY}')]
+    Page Should Contain Element                     xpath=//ul[contains(@class, 'product_list')]
             
 #Caso de teste 04
 
-Clicar em "Sign in"    
+E clicar em "Sign in"    
     Click Element                                   ${LOGIN_TOP}
-Informar um e-mail válido
-    Input Text                                      ${EMAL_VALID}         ${DADOS.email}
-Clicar em "Create an account"
-    Wait Until Element Is Visible                   ${CONTA_CREATE}
-    Click Element                                   ${CONTA_CREATE}
-Preencher os dados obrigatórios
+E informar um e-mail válido
+    Input Text                                      ${ACCOUNT_CREATE.email_valid}         ${DADOS.email}
+E clicar em "Create an account"
+    Wait Until Element Is Visible                   ${ACCOUNT_CREATE.button_create}
+    Click Element                                   ${ACCOUNT_CREATE.button_create}
+E preencher os dados obrigatórios
     #Seletor de Mr ou Mrs
-    Wait Until Element Is Visible                   ${MR} 
-    Click Element                                   ${MR} 
+    Wait Until Element Is Visible                   ${ACCOUNT_CREATE.mr} 
+    Click Element                                   ${ACCOUNT_CREATE.mr}  
     
-    #Nome e Sobrenome
-    Wait Until Element Is Visible                   ${FISRT_NAME}    
-    Input Text                                      ${FISRT_NAME}          ${DADOS.first_name}
+    Wait Until Element Is Visible                   ${ACCOUNT_CREATE.first_name}    
+    Input Text                                      ${ACCOUNT_CREATE.first_name}          ${DADOS.first_name}
     
-    Wait Until Element Is Visible                   ${LAST_NAME}
-    Input Text                                      ${LAST_NAME}           ${DADOS.last_name}
+    Wait Until Element Is Visible                   ${ACCOUNT_CREATE.last_name}
+    Input Text                                      ${ACCOUNT_CREATE.last_name}           ${DADOS.last_name}
     
-    #Senha
-    Wait Until Element Is Visible                   ${PASSWORD}
-    Input Text                                      ${PASSWORD}            ${DADOS.Passeword} 
+    Wait Until Element Is Visible                   ${ACCOUNT_CREATE.password}
+    Input Text                                      ${ACCOUNT_CREATE.password}            ${DADOS.Password} 
     
-    #Data de nascimento
-    Wait Until Element Is Visible                   ${DAY}
-    Select From List By Value                       ${DAY_SELECT}          ${DADOS.day}
-    Wait Until Element Is Visible                   ${MONTH}
-    Select From List By Value                       ${MONTH_SELECT}        ${DADOS.month}
-    Wait Until Element Is Visible                   ${YEAR}
-    Select From List By Value                       ${YEAR_SELECT}         ${DADOS.year}     
+    Wait Until Element Is Visible                   ${ACCOUNT_CREATE.day}
+    Select From List By Value                       ${ACCOUNT_CREATE.day_select}          ${DADOS.day}
 
-    #Endereço
-    Wait Until Element Is Visible                   ${ADDRESS}
-    Scroll Element Into View                        ${ADDRESS}
-    Input Text                                      ${ADDRESS}             ${DADOS.address}
-    Wait Until Element Is Visible                   ${CITY}
-    Scroll Element Into View                        ${CITY}
-    Input Text                                      ${CITY}                ${DADOS.city}
-    Wait Until Element Is Visible                   ${STATE_2}
-    Scroll Element Into View                        ${STATE_2}
-    Select From List By Value                       ${STATE}               ${DADOS.state_sel}
-    Wait Until Element Is Visible                   ${POSTCODE}
-    Scroll Element Into View                        ${POSTCODE}
-    Input Text                                      ${POSTCODE}            ${DADOS.zipcode}
-    Wait Until Element Is Visible                   ${PHONE}
-    Scroll Element Into View                        ${PHONE}
-    Input Text                                      ${PHONE}               ${DADOS.phone}
-Submeter cadastro
-    Wait Until Element Is Visible                   ${REGISTER}
-    Scroll Element Into View                        ${REGISTER}
-    Click Element                                   ${REGISTER}
-Conferir se o cadastro foi efetuado com sucesso 
+    Wait Until Element Is Visible                   ${ACCOUNT_CREATE.month}
+    Select From List By Value                       ${ACCOUNT_CREATE.month_select}        ${DADOS.month}
+
+    Wait Until Element Is Visible                   ${ACCOUNT_CREATE.year}
+    Select From List By Value                       ${ACCOUNT_CREATE.year_select}         ${DADOS.year}     
+
+    Wait Until Element Is Visible                   ${ACCOUNT_CREATE.addres}
+    Scroll Element Into View                        ${ACCOUNT_CREATE.addres}
+    Input Text                                      ${ACCOUNT_CREATE.addres}              ${DADOS.address}
+
+    Wait Until Element Is Visible                   ${ACCOUNT_CREATE.city} 
+    Scroll Element Into View                        ${ACCOUNT_CREATE.city}  
+    Input Text                                      ${ACCOUNT_CREATE.city}               ${DADOS.city}
+
+    Wait Until Element Is Visible                   ${ACCOUNT_CREATE.state_2} 
+    Scroll Element Into View                        ${ACCOUNT_CREATE.state_2} 
+    Select From List By Value                       ${ACCOUNT_CREATE.state}             ${DADOS.state_sel}
+
+    Wait Until Element Is Visible                   ${ACCOUNT_CREATE.postcode} 
+    Scroll Element Into View                        ${ACCOUNT_CREATE.postcode}
+    Input Text                                      ${ACCOUNT_CREATE.postcode}            ${DADOS.postcode}
+
+    Wait Until Element Is Visible                   ${ACCOUNT_CREATE.phone}
+    Scroll Element Into View                        ${ACCOUNT_CREATE.phone}
+    Input Text                                      ${ACCOUNT_CREATE.phone}               ${DADOS.phone}
+Quando submeter cadastro
+    Wait Until Element Is Visible                   ${ACCOUNT_CREATE.button_register}
+    Scroll Element Into View                        ${ACCOUNT_CREATE.button_register}
+    Click Element                                   ${ACCOUNT_CREATE.button_register}
+Então conferir se o cadastro foi efetuado com sucesso 
     Wait Until Element Is Visible                   ${TOP_MENU}
-    Page Should Contain Element      xpath=//div[@id='center_column']//p[contains(text(), 'Welcome to your account. Here you can manage all of your personal information and orders.')]
+    Page Should Contain Element                     ${WELCOME_ACCOUNT}
 
 
 #Sites para praticar:

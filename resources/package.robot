@@ -5,19 +5,19 @@ Documentation        Aqui estarão todos os recursos que compõem o projeto
 #             Libraries            #
 ####################################
 
-Library        SeleniumLibrary    
+Library         SeleniumLibrary   
 
 ####################################
 #             Keywords             #
 ####################################
 
-Resource        keywords/kws_webautomation.robot
+Resource        ../resources/keywords/kws_webautomation.robot
 
 ####################################
-#             Keywords             #
+#             Pages                #
 ####################################
 
-Resource        pages/pages_webautomation.robot
+Resource        ../resources/pages/pages_webautomation.robot
 
 ####################################
 #             Hooks                #
